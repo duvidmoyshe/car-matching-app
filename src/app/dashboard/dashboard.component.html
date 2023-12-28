@@ -1,7 +1,6 @@
 <div class="container">
   <div class="example-action-buttons">
-    <button mat-button (click)="toggleAccordion()"
-    [matTooltip]="isAccordionOpened ? 'Collapse All' : 'Expand All'">
+    <button mat-button (click)="toggleAccordion()" [matTooltip]="isAccordionOpened ? 'Collapse All' : 'Expand All'">
       <mat-icon class="toggle">
         <span class="material-symbols-outlined">
           {{ isAccordionOpened ? 'expand_less' : 'expand_more' }}
