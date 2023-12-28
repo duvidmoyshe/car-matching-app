@@ -1,0 +1,87 @@
+<div class="content">
+  <mat-card class="form-card">
+    <mat-card-title>please fill all the relevant fields</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="carForm" (ngSubmit)="submitForm()">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Full Name" formControlName="fullName">
+          <!-- <mat-error *ngIf="carForm?.get('fullName')?.hasError('required')">Full Name is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Gender</mat-label>
+          <mat-select placeholder="Gender" formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="carForm?.get('gender')?.hasError('required')">Gender is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Email" formControlName="email">
+          <!-- <mat-error *ngIf="carForm?.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="carForm?.get('email')?.hasError('email')">Invalid email</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Birth Date" formControlName="birthDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <!-- <mat-error *ngIf="carForm?.get('birthDate')?.hasError('required')">Birth Date is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Address" formControlName="address">
+          <!-- <mat-error *ngIf="carForm?.get('address')?.hasError('required')">Address is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="City" formControlName="city">
+          <!-- <mat-error *ngIf="carForm?.get('city')?.hasError('required')">City is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Country" formControlName="country">
+          <!-- <mat-error *ngIf="carForm?.get('country')?.hasError('required')">Country is required</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Hobbie" formControlName="hobbies" multiple>
+            <mat-option [value]="hobbie" *ngFor="let hobbie of hobbies">
+              {{hobbie}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <label for="colorPicker">Choose a Color:</label>
+          <mat-select id="colorPicker" formControlName="favoriteColor">
+            <mat-option *ngFor="let color of colorOptions" [value]="color.name"
+              [style.background]="color.value"></mat-option>
+          </mat-select>
+          <div [style.background]="carForm.controls['favoriteColor'].value || 'White'"
+            style="width: 50px; height: 50px; margin-top: 10px;"></div>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="numOfSeats" formControlName="numOfSeats">
+            <mat-option [value]='seat' *ngFor="let seat of seats">
+              {{seat}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="motor-type" formControlName="motorType">
+            <mat-option [value]="motorType" *ngFor="let motorType of motorTypes">
+              {{motorType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submitForm()">Send</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

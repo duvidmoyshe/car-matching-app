@@ -103,7 +103,9 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@angular/google-maps/bundles/google-maps.umd.min.js"
+            ]
           }
         }
       }
