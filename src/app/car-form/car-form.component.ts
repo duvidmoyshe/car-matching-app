@@ -6,7 +6,7 @@ import { colors, motorTypes, seats } from './../const/colors.const';
 @Component({
   selector: 'app-car-form',
   templateUrl: './car-form.component.html',
-  styleUrls: ['./car-form.component.scss']
+  styleUrls: ['./car-form.component.scss'],
 })
 export class CarFormComponent {
   carForm!: FormGroup;
@@ -14,10 +14,10 @@ export class CarFormComponent {
   motorTypes = motorTypes;
   seats = seats;
   colors = colors;
-  selectedColor: string = '#00ff00';
   colorOptions = colorOptions;
+  selectedColor: string = '#00ff00';
 
-  constructor(private fb: FormBuilder) {
+  constructor( private fb: FormBuilder ) {
     this.createForm();
   }
 

@@ -7,9 +7,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
@@ -41,7 +41,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    // MatDatepickerModule,
+    MatDatepickerModule,
     MatSelectModule,
     MatNativeDateModule,
     MatInputModule,
@@ -50,6 +50,7 @@ import { FooterComponent } from './footer/footer.component';
     MatExpansionModule,
   ],
   providers: [
+  FormBuilder,
   ],
   bootstrap: [AppComponent]
 })
