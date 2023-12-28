@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { colorOptions, hobbies } from '../const/colors.const';
 import { MockLocationService } from '../services/mock-location.service';
 import { motorTypes, seats } from './../const/colors.const';
@@ -17,8 +17,8 @@ export class CarFormComponent implements OnInit {
   motorTypes = motorTypes;
   seats = seats;
   colorOptions = colorOptions;
-  cities: { id: number; value: string; }[] | undefined;
-  countries: { id: number; value: string; }[] | undefined;
+  cities$: Observable<{ id: number; value: string; }[] | undefined> | undefined;
+  countries$: Observable<{ id: number; value: string; }[] | undefined> | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -50,11 +50,9 @@ export class CarFormComponent implements OnInit {
 
   submitForm(): void {
     if (this.carForm.valid) {
-      console.log('Form submitted:', this.carForm.value);
       const storedData = localStorage.getItem('formData') ? JSON.parse(localStorage.getItem('formData')!) : [];
       storedData.push(this.carForm.value);
       localStorage.setItem('formData', JSON.stringify(storedData));
-      console.log('Request sent. A mail with your match will be sent to you.');
       this.snackBar.open('Request sent. A mail with your match will be sent to you.', 'Close', {
         duration: 3000,
       });
@@ -75,20 +73,15 @@ export class CarFormComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.mockLocationService.getCountries().subscribe((countries) => {
-      this.countries = countries;
-    });
+    this.countries$ = this.mockLocationService.getCountries();
   }
 
   onCountryChange(event: any): void {
     const selectedCountry = this.carForm.get('country')?.value;
     if (selectedCountry) {
-      this.mockLocationService.getCitiesInCountry(selectedCountry).pipe(
+      this.cities$ = this.mockLocationService.getCitiesInCountry(selectedCountry).pipe(
         map(cities => cities.value)
-      ).
-        subscribe((cities) => {
-          this.cities = cities;
-        });
+      )
     }
   }
 

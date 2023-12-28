@@ -1,5 +1,5 @@
 <div class="content">
-  <h1>please fill all the relevant fields</h1>
+  <h1>please fill all fields for perfect match</h1>
   <mat-card class="form-card">
     <mat-card-content>
       <form [formGroup]="carForm" (ngSubmit)="submitForm()">
@@ -33,10 +33,10 @@
           <mat-error *ngIf="carForm?.get('birthDate')?.hasError('required')">Birth Date is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width" *ngIf="countries?.length">
+        <mat-form-field class="full-width">
           <mat-label>Country</mat-label>
           <mat-select placeholder="Country" formControlName="country" (selectionChange)="onCountryChange($event)">
-            <mat-option [value]="country.id" *ngFor="let country of countries">{{country.value}}</mat-option>
+            <mat-option [value]="country.id" *ngFor="let country of countries$ | async">{{country.value}}</mat-option>
           </mat-select>
           <mat-error *ngIf="carForm?.get('country')?.hasError('required')">Country is required</mat-error>
           <div></div>
@@ -45,7 +45,7 @@
         <mat-form-field class="full-width">
           <mat-label>City</mat-label>
           <mat-select placeholder="City" formControlName="city">
-            <mat-option [value]="city?.id" *ngFor="let city of cities">{{city?.value}}</mat-option>
+            <mat-option [value]="city?.id" *ngFor="let city of cities$ | async">{{city?.value}}</mat-option>
           </mat-select>
           <div></div>
           <mat-error *ngIf="carForm?.get('city')?.hasError('required')">City is required</mat-error>
@@ -78,8 +78,8 @@
           </mat-select>
           <div [style.background]="carForm.controls['favoriteColor'].value || 'White'"
             style="width: 50px; height: 50px; margin-top: 10px;"></div>
-          </mat-form-field>
-          <mat-error *ngIf="carForm?.get('color')?.hasError('required')">Color is required</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="carForm?.get('color')?.hasError('required')">Color is required</mat-error>
 
         <mat-form-field class="full-width">
           <mat-label>NumOfSeats</mat-label>
